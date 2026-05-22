@@ -1,0 +1,130 @@
+    return {
+n
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+shelfcare/
+.shelfcare/
+env/
+ENV/
+.python-version
+
+# Pyenv
+.pyenv/
+
+# Pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =========================
+# Testing / Coverage
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+
+# =========================
+# IDE / Editor Files
+# =========================
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+*.pem
+*.key
+*.crt
+
+# AWS credentials
+.aws/
+
+# =========================
+# Docker
+# =========================
+docker-data/
+*.tar
+
+# =========================
+# Kubernetes
+# =========================
+kubeconfig
+*.kubeconfig
+
+# =========================
+# Terraform
+# =========================
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+*.tfvars
+
+# =========================
+# Postgress_data
+# =========================
+postgress_data/
+
+images/
+# =========================
+# Ansible
+# =========================
+*.retry
+
+# =========================
+# Node.js
+# =========================
+node_modules/
+
+# =========================
+# Misc
+# =========================
+tmp/
+temp/
+.cache/
+        "title": title,
+        "author": author,
+        "confidence": float(conf)
+    }
+

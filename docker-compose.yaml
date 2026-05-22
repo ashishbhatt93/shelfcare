@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  backend:
+    image: shelfcare-be:v1
+    networks:
+      - shelfcare-net
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    networks:
+      - shelfcare-net
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: strongpassword
+      POSTGRES_DB: bookdb
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - shelfcare-net
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+
+networks:
+  shelfcare-net:
+    name: shelfcare-net
+    driver: bridge
