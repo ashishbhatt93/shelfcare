@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models import Book, Watchlist
+from app.books.models import Book
+from app.watchlist.models import Watchlist
 
 def create_book(db, user_id, data):
     book = Book(

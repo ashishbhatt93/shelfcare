@@ -6,10 +6,21 @@ services:
     image: shelfcare-be:v1
     networks:
       - shelfcare-net
+    ports:
+      - "8000:8000"
     env_file:
       - ./backend/.env
     depends_on:
       - postgres
+
+  frontend:
+    image: shelfcare-fe:v1
+    networks:
+      - shelfcare-net
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
 
   postgres:
     image: postgres:15
@@ -22,16 +33,6 @@ services:
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
 
-  nginx:
-    image: nginx:latest
-    networks:
-      - shelfcare-net
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - backend
 
 networks:
   shelfcare-net:

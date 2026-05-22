@@ -1,4 +1,4 @@
-from app.models import Watchlist
+from app.watchlist.models import Watchlist
 
 def add_to_watchlist(db, user_id, data):
     watch = Watchlist(

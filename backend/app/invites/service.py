@@ -1,7 +1,8 @@
 import uuid
 from datetime import datetime, timedelta
 from sqlalchemy.orm import Session
-from app.models import Invite, User
+from app.invites.models import Invite
+from app.auth.models import User
 
 
 INVITE_LIMIT_PER_MONTH = 2

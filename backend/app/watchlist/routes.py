@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
-
 from app.db import get_db
-from app.models import User
+from app.auth.models import User
 from app.watchlist.schemas import WatchCreate, WatchResponse
 from app.watchlist.service import add_to_watchlist, get_watchlist
 from app.invites.routes import get_current_user
