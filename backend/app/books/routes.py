@@ -3,7 +3,8 @@ from sqlalchemy.orm import Session
 from app.db import get_db
 from app.books.schemas import BookCreate, BookResponse
 from app.books.service import create_book, get_user_books
-from app.models import User, Book
+from app.auth.models import User
+from app.books.models import Book
 from app.invites.routes import get_current_user
 from typing import List
 

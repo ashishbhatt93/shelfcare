@@ -5,8 +5,19 @@ from app.auth.routes import router as auth_router
 from app.books.routes import router as books_router
 from app.watchlist.routes import router as watchlist_router
 from app.ocr.routes import router as ocr_router
+from app.auth.models import User
+from app.invites.models import Invite
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Book Marketplace API")
+app.add_middleware(
+    CORSMiddleware,
+#    allow_origins=["*"],
+    allow_origin_regex=r"http://.*",
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Create tables on startup (for MVP)
 @app.on_event("startup")

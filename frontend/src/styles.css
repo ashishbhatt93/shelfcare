@@ -1,0 +1,9 @@
+/* Legacy styles - mostly handled by common.css now */
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-light);
+}
