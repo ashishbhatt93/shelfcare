@@ -1,7 +1,10 @@
 import axios from 'axios'
 
+const API_BASE = import.meta.env.VITE_API_URL ||
+	  `${window.location.protocol}//${window.location.hostname}:8000`
+
 const API = axios.create({
-  baseURL: '/api',
+	baseURL: API_BASE,
 })
 
 // Add token to requests

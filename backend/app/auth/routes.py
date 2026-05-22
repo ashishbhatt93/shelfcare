@@ -2,15 +2,16 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db import get_db
 from app.auth.schemas import RegisterRequest
+from app.auth.schemas import LoginRequest
 from app.auth.service import register_user
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
-@router.post("/register")
-def register(data: RegisterRequest, db: Session = Depends(get_db)):
+@router.post("/signup")
+def signup(data: RegisterRequest, db: Session = Depends(get_db)):
     try:
-        user = register_user(db, data.phone, data.invite_code)
+        user = register_user(db, data)
         return {
             "message": "User registered successfully",
             "user_id": user.id
@@ -19,11 +20,19 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail=str(e))
 
 @router.post("/login")
-def login(phone: str, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.phone_number == phone).first()
+def login(
+    data: LoginRequest,
+    db: Session = Depends(get_db)
+):
+    user = db.query(User).filter(
+        User.phone_number == data.phone_number
+    ).first()
 
     if not user:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
 
     return {
         "message": "Login successful",

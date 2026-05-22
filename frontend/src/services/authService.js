@@ -10,13 +10,8 @@ export const authService = {
     return response.data
   },
 
-  signup: async (email, password, name, inviteCode) => {
-    const response = await API.post('/auth/signup', { 
-      email, 
-      password, 
-      name,
-      invite_code: inviteCode 
-    })
+  signup: async (payload) => {
+    const response = await API.post('/auth/signup', payload)
     if (response.data.token) {
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('user', JSON.stringify(response.data.user))

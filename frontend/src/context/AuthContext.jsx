@@ -33,11 +33,11 @@ export function AuthProvider({ children }) {
     }
   }, [])
 
-  const signup = useCallback(async (email, password, name, inviteCode) => {
+  const signup = useCallback(async (payload) => {
     setError(null)
     setLoading(true)
     try {
-      const response = await authService.signup(email, password, name, inviteCode)
+      const response = await authService.signup(payload)
       setUser(response.user)
       return response
     } catch (err) {

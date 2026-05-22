@@ -7,6 +7,7 @@ function Signup() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phoneNumber:'',
     inviteCode: '',
     password: '',
     confirmPassword: '',
@@ -30,7 +31,13 @@ function Signup() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email'
     }
-
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Phone number is required'
+    } else if (!/^\d+$/.test(formData.phoneNumber)) {
+      newErrors.phoneNumber = 'Phone number can only contain numbers'
+    } else if (formData.phoneNumber.length !== 10){
+      newErrors.phoneNumber = 'Phone number must be 10 digits'
+    }
     if (!formData.inviteCode.trim()) {
       newErrors.inviteCode = 'Invite code is required'
     } else if (formData.inviteCode.trim().length < 1) {
@@ -76,8 +83,16 @@ function Signup() {
 
     setIsSubmitting(true)
     try {
-      await signup(formData.email, formData.password, formData.name, formData.inviteCode)
-      navigate('/')
+  //    await signup(formData.email, formData.password, formData.name, formData.inviteCode)
+      await signup({
+        name: formData.name,
+        email: formData.email,
+        phone_number: formData.phoneNumber,
+        password: formData.password,
+        invite_code: formData.inviteCode,
+      })
+      alert('Account created successfully! Please login.')
+      navigate('/dashboard')
     } catch (err) {
       console.error('Signup failed:', err)
     } finally {
@@ -122,6 +137,26 @@ function Signup() {
               className={`form-input ${errors.email ? 'error' : ''}`}
             />
             {errors.email && <span className="error-text">{errors.email}</span>}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <input
+              type="phoneNumber"
+              id="phoneNumber"
+              name="phonNumber"
+              value={formData.phoneNumber}
+              onChange={(e) => {
+                const onlyNums = e.target.value.replace(/\D/g, '')
+		setFormData((prev) => ({
+		  ...prev,
+		  phoneNumber: onlyNums,
+		}))
+	      }}
+              placeholder="9876543210"
+              className={`form-input ${errors.phoneNumber ? 'error' : ''}`}
+            />
+            {errors.phoneNumber && <span className="error-text">{errors.phoneNumber}</span>}
           </div>
 
           <div className="form-group">
